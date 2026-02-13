@@ -18,7 +18,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const recipientEmail = process.env.RECIPIENT_EMAIL || process.env.SMTP_USER;
 
 app.post('/api/contact', async (req, res) => {
-  const { name, email, phone, propertyType, message } = req.body || {};
+  const { name, email, phone, company, propertyType, message } = req.body || {};
 
   if (!name || !email || !message) {
     return res.status(400).json({
@@ -42,6 +42,7 @@ app.post('/api/contact', async (req, res) => {
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
         <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
         <p><strong>Phone:</strong> ${escapeHtml(phone || '—')}</p>
+        <p><strong>Company:</strong> ${escapeHtml(company || '—')}</p>
         <p><strong>Property type:</strong> ${escapeHtml(propertyType || '—')}</p>
         <h3>Message</h3>
         <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>

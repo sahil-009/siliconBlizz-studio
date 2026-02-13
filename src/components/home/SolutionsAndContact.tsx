@@ -1,18 +1,19 @@
 import { useState, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MapPin, Settings } from "lucide-react";
+import { Send, Mail, MapPin, Settings, Loader2 } from "lucide-react";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { Globe, Workflow, BarChart3, MessageCircle } from "lucide-react";
 import { Meteors } from "@/components/ui/meteors";
 
 const Globe3D = lazy(() => import("@/components/ui/3d-globe"));
 
 const globeMarkers = [
-  { lat: 40.7128, lng: -74.006, src: "https://assets.aceternity.com/avatars/1.webp", label: "New York" },
-  { lat: 51.5074, lng: -0.1278, src: "https://assets.aceternity.com/avatars/2.webp", label: "London" },
-  { lat: 35.6762, lng: 139.6503, src: "https://assets.aceternity.com/avatars/3.webp", label: "Tokyo" },
-  { lat: -33.8688, lng: 151.2093, src: "https://assets.aceternity.com/avatars/4.webp", label: "Sydney" },
-  { lat: 28.6139, lng: 77.209, src: "https://assets.aceternity.com/avatars/6.webp", label: "New Delhi" },
-  { lat: 1.3521, lng: 103.8198, src: "https://assets.aceternity.com/avatars/12.webp", label: "Singapore" },
+  { lat: 40.7128, lng: -74.006, src: "/founder-images/sahil.jpeg", label: "India" },
+  { lat: 51.5074, lng: -0.1278, src: "/founder-images/rohit.jpeg", label: "India" },
+  { lat: 35.6762, lng: 139.6503, src: "/founder-images/allen.jpeg", label: "Tokyo" },
+  { lat: -33.8688, lng: 151.2093, src: "/founder-images/anwishka.jpeg", label: "India" },
+
 ];
 
 const projectTypes = ["Website / App", "Automation System", "CRM / WhatsApp", "Dashboard / Tool", "Full Digital Infrastructure", "Other"];
@@ -47,10 +48,46 @@ const solutionSections = [
 export default function SolutionsAndContact() {
   const [form, setForm] = useState({ name: "", email: "", company: "", type: "", description: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    try {
+      await addDoc(collection(db, "leads"), {
+        ...form,
+        createdAt: serverTimestamp(),
+      });
+      setSubmitted(true);
+      setForm({ name: "", email: "", company: "", type: "", description: "" });
+
+      // Send email via backend
+      try {
+        await fetch('http://localhost:5000/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            company: form.company,
+            propertyType: form.type,
+            message: form.description
+          }),
+        });
+      } catch (emailError) {
+        console.error("Failed to send email notif:", emailError);
+        // We don't block success UI if only email fails, since Firestore saved it
+      }
+
+    } catch (err) {
+      console.error("Error adding document: ", err);
+      setError("Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -143,9 +180,20 @@ export default function SolutionsAndContact() {
                   </div>
                   <h3 className="font-display text-2xl font-bold mb-3">Message Sent</h3>
                   <p className="text-muted-foreground">We'll be in touch shortly to discuss your project.</p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="mt-6 text-sm text-primary hover:underline"
+                  >
+                    Send another message
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {error && (
+                    <div className="p-3 text-sm text-red-500 bg-red-500/10 border border-red-500/20 rounded-lg">
+                      {error}
+                    </div>
+                  )}
                   {[
                     { key: "name", label: "Name", type: "text" },
                     { key: "email", label: "Email", type: "email" },
@@ -183,11 +231,19 @@ export default function SolutionsAndContact() {
                   />
                   <motion.button
                     type="submit"
+                    disabled={loading}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full rounded-xl bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:brightness-110 animate-pulse-glow"
+                    className="w-full rounded-xl bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:brightness-110 animate-pulse-glow disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
-                    Start My Project
+                    {loading ? (
+                      <>
+                        <Loader2 size={18} className="animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      "Start My Project"
+                    )}
                   </motion.button>
                 </form>
               )}
