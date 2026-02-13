@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { EnquireSidebar } from "@/components/ui/enquire-sidebar";
 
 const navItems = [
   { label: "Home", id: "hero" },
@@ -45,12 +46,13 @@ export default function Navbar() {
               {item.label}
             </button>
           ))}
-          <button
-            onClick={() => scrollTo("contact")}
-            className="rounded-lg bg-primary/10 border border-primary/30 px-5 py-2 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary/20 hover:border-primary/50 hover:scale-105"
-          >
-            Get Started
-          </button>
+          <EnquireSidebar>
+            <button
+              className="rounded-lg bg-primary/10 border border-primary/30 px-5 py-2 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary/20 hover:border-primary/50 hover:scale-105 shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]"
+            >
+              Enquire Now
+            </button>
+          </EnquireSidebar>
         </div>
 
         <button className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>

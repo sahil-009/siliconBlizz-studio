@@ -134,10 +134,10 @@ export default function HeroSection() {
         >
           <div className="glass-card rounded-2xl px-4 sm:px-8 py-4 sm:py-5 grid grid-cols-2 sm:flex sm:items-center sm:justify-between gap-4 sm:gap-6">
             {[
-              { icon: Users, value: "1000+", label: "Happy Customers" },
-              { icon: Zap, value: "100+", label: "Automations Built" },
+              { icon: Users, value: "500+", label: "Happy Customers" },
+              { icon: Zap, value: "200+", label: "Automations Built" },
               { icon: Globe, value: "9+", label: "Countries Served" },
-              { icon: Shield, value: "99.9%", label: "Uptime Guarantee" },
+              { icon: Shield, value: "98.9%", label: "Uptime Guarantee" },
             ].map((stat) => (
               <div key={stat.label} className="flex items-center gap-2 sm:gap-3">
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
