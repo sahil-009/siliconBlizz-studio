@@ -7,7 +7,11 @@ import { Resend } from 'resend';
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+  origin: '*', // Allow all origins for Vercel deployment (or restrict to your specific domain)
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+}));
 app.use(express.json());
 
 // Resend Client Initialization
@@ -83,6 +87,13 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
-app.listen(PORT, () => {
-  console.log(`Contact API running at http://localhost:${PORT}`);
-});
+// Export the app for Vercel Serverless
+export default app;
+
+// Only listen if running locally (not imported as a module)
+// In Vercel, this file is imported, so app.listen won't run automatically
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Contact API running at http://localhost:${PORT}`);
+  });
+}
