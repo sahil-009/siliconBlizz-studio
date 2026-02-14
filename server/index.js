@@ -12,8 +12,11 @@ app.use(express.json());
 
 // Resend Client Initialization
 // Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY);
-
+const resendApiKey = process.env.RESEND_API_KEY;
+if (!resendApiKey) {
+  console.warn('⚠️ WARNING: RESEND_API_KEY is not defined in .env. Email sending will be skipped.');
+}
+const resend = new Resend(resendApiKey);
 // Where to receive contact form submissions
 const recipientEmail = process.env.RECIPIENT_EMAIL || process.env.SMTP_USER;
 
@@ -33,8 +36,15 @@ app.post('/api/contact', async (req, res) => {
   }
 
   try {
+    // Construct sender email. If SENDER_EMAIL is just a domain (e.g. 'example.com'), make it 'onboarding@example.com' or similar.
+    // If it is a full email, use it directly.
+    let sender = process.env.SENDER_EMAIL || 'onboarding@resend.dev';
+    if (!sender.includes('@')) {
+      sender = `contact@${sender}`;
+    }
+
     const { data, error } = await resend.emails.send({
-      from: process.env.SENDER_EMAIL || 'onboarding@resend.dev',
+      from: sender,
       to: [recipientEmail],
       subject: `New lead: ${name} – ${propertyType || 'General'}`,
       html: `
