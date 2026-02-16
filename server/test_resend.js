@@ -6,10 +6,10 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 (async () => {
     try {
         const { data, error } = await resend.emails.send({
-            from: 'onboarding@resend.dev',
-            to: 'info.ruinteriors@gmail.com',
-            subject: 'Hello World',
-            html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
+            from: 'contact@siliconblizz.in',
+            to: [process.env.RECIPIENT_EMAIL],
+            subject: 'Test Email from SiliconBlizz',
+            html: '<p>This is a test email from <strong>SiliconBlizz</strong> to verify email configuration!</p>'
         });
 
         if (error) {
