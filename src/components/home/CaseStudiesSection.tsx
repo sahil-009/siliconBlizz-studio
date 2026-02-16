@@ -8,8 +8,8 @@ const caseStudies = [
   {
     project: "RU interior Designs",
     industry: "Interior",
-    problem: "Manual client management and follow-up processes causing 40% drop-off rate.",
-    solution: "from creating website to managing clients and follow-ups and handle social media",
+    problem: "Manual client management and follow up processes causing 40% drop-off rate.",
+    solution: "from creating website to managing clients and follow ups and handle social media",
     result: "+30% Bookings in 60 Days",
     category: "Interior",
   },
@@ -32,8 +32,8 @@ const caseStudies = [
   {
     project: "JK interior Designs",
     industry: "Interior",
-    problem: "Manual client management and follow-up processes causing 40% drop-off rate.",
-    solution: "from creating website to managing clients and follow-ups and handle social media",
+    problem: "Manual client management and follow up processes causing 40% drop-off rate.",
+    solution: "from creating website to managing clients and follow ups and handle social media",
     result: "45% Fewer No-Shows",
     category: "Interior",
   },

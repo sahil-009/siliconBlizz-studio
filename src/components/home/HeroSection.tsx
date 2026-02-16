@@ -116,7 +116,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="block h-[300px] lg:h-[500px] relative w-full"
+              className="hidden lg:block h-[300px] lg:h-[500px] relative w-full"
             >
               <Suspense fallback={<div className="w-full h-full" />}>
                 <HeroScene />

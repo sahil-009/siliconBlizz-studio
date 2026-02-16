@@ -22,13 +22,13 @@ const solutionSections = [
   {
     icon: Globe,
     title: "Websites & Apps",
-    desc: "Conversion-optimized, blazing-fast websites and scalable web applications tailored for your brand and growth goals.",
+    desc: "Conversion-optimized, blazing fast websites and scalable web applications tailored for your brand and growth goals.",
     features: ["Custom design & development", "Responsive across all devices", "SEO-optimized architecture", "Performance-first approach"],
   },
   {
     icon: Workflow,
     title: "Automation Workflows",
-    desc: "End-to-end automation using n8n, Zapier, and custom API integrations that eliminate repetitive tasks.",
+    desc: "End to end automation using n8n, Zapier, and custom API integrations that eliminate repetitive tasks.",
     features: ["Lead capture automation", "Data sync between tools", "Scheduled report generation", "Custom API integrations"],
   },
   {
@@ -40,7 +40,7 @@ const solutionSections = [
   {
     icon: BarChart3,
     title: "Dashboards & Internal Tools",
-    desc: "Custom analytics dashboards and internal tools that give you real-time visibility into your operations.",
+    desc: "Custom analytics dashboards and internal tools that give you real time visibility into your operations.",
     features: ["Real-time data visualization", "KPI tracking dashboards", "Custom admin panels", "Automated reporting"],
   },
 ];

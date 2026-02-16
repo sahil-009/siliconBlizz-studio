@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { Meteors } from "@/components/ui/meteors";
 
 const cases = [
-  { metric: "+30%", label: "Bookings in 60 Days", desc: "Healthcare clinic automated patient intake and follow-ups." },
+  { metric: "+30%", label: "Bookings in 60 Days", desc: "Healthcare clinic automated patient intake and follow ups." },
   { metric: "20+ hrs", label: "Saved / Week", desc: "Marketing agency replaced manual CRM processes with automation." },
 ];
 

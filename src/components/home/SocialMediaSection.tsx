@@ -7,7 +7,7 @@ import { Meteors } from "@/components/ui/meteors";
 const teamMembers = [
   { id: 1, name: "Sahil Mund", designation: "Founder and Developer", image: "/founder-images/sahil.jpeg" },
   { id: 2, name: "Rohit Dey", designation: "Co Founder & Marketing Lead", image: "/founder-images/rohit.jpeg" },
-  { id: 3, name: "Allen Ritter", designation: "Design & Content", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=800&q=80" },
+  { id: 3, name: "Allen Ritter", designation: "Design & Content", image: "/founder-images/foreign.jpg" },
   { id: 4, name: "Anwiksha Dutta", designation: "Head Sales Executive", image: "/founder-images/anwishka.jpeg" },
   { id: 5, name: "12+ Employees", designation: "Team", image: "/founder-images/12.png" },
 ];
@@ -17,13 +17,13 @@ const testimonials = [
     quote: "They completely automated our social media pipeline  from content scheduling to analytics. We just focus on our business now.",
     name: "Arjun Mehta",
     designation: "Founder, GrowthLoop",
-    src: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=800&q=80",
+    src: "_.jpeg",
   },
   {
     quote: "Our engagement tripled within two months. Their automation workflows for Instagram and WhatsApp are game changing.",
-    name: "Priya Sharma",
-    designation: "Marketing Head, BrandPulse",
-    src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=800&q=80",
+    name: "John Lee",
+    designation: "Founder, GNC",
+    src: "foreign2.jpeg",
   },
   {
     quote: "We used to spend 15 hours a week on social media. Now it's fully automated and performing better than ever.",
