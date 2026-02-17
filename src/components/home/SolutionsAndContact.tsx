@@ -22,7 +22,7 @@ const solutionSections = [
   {
     icon: Globe,
     title: "Websites & Apps",
-    desc: "Conversion-optimized, blazing fast websites and scalable web applications tailored for your brand and growth goals.",
+    desc: "Conversion optimized, blazing fast websites and scalable web applications tailored for your brand and growth goals.",
     features: ["Custom design & development", "Responsive across all devices", "SEO-optimized architecture", "Performance-first approach"],
   },
   {
@@ -107,7 +107,7 @@ export default function SolutionsAndContact() {
               <span className="gradient-text">for Scale</span>
             </h2>
             <p className="text-muted-foreground max-w-lg mx-auto text-lg">
-              From beautiful frontends to invisible backend automation — we build the systems that power modern businesses.
+              From beautiful frontends to invisible backend automation we build the systems that power modern businesses.
             </p>
           </motion.div>
 

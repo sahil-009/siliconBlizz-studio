@@ -10,7 +10,7 @@ export default function Footer() {
               Silicon<span className="text-primary">Blizz</span>
             </h3>
             <p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
-              AI-Powered Digital & Automation Studio. We build websites, scalable apps, AI automation systems, and digital growth infrastructure.
+              AI Powered Digital & Automation Studio. We build websites, scalable apps, AI automation systems, and digital growth infrastructure.
             </p>
           </div>
           <div>

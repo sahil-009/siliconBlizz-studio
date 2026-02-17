@@ -51,7 +51,7 @@ export default function SocialMediaSection() {
           className="text-center mb-20"
         >
           <h2 className="font-display text-4xl sm:text-5xl font-bold mb-6">
-            Social Media Automation —{" "}
+            Social Media Automation {" "}
             <span className="gradient-text">Join Us & Forget Worries</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg mb-10">

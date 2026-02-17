@@ -33,7 +33,7 @@ const twitterReviews = [
     name: "Neha Patel",
     handle: "@neha_startup",
     avatar: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=100&q=80",
-    text: "We went from zero to fully automated CRM + WhatsApp in under 3 weeks with @SiliconBlizz. The team is world-class. 💯",
+    text: "We went from zero to fully automated CRM + WhatsApp in under 3 weeks with @SiliconBlizz. The team is world class. 💯",
     date: "Feb 8, 2026",
     likes: 156,
     retweets: 28,

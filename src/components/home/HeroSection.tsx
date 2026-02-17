@@ -36,7 +36,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
                 <span className="inline-block text-xs font-medium tracking-widest uppercase text-primary mb-6 border border-primary/20 rounded-full px-4 py-1.5 backdrop-blur-sm">
-                  AI-Powered Digital Studio
+                  AI Powered Digital Studio
                 </span>
               </motion.div>
 
@@ -56,7 +56,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="text-lg text-muted-foreground max-w-md leading-relaxed mb-8"
               >
-                We build websites, apps, and AI-powered automation systems that scale your business — so you can focus on what matters most.
+                We build websites, apps, and AI powered automation systems that scale your business so you can focus on what matters most.
               </motion.p>
 
               {/* Trust indicators */}
@@ -75,7 +75,7 @@ export default function HeroSection() {
                     ))}
                   </div>
                   <span className="text-sm text-muted-foreground">
-                    <span className="text-foreground font-semibold">1,000+</span> happy customers
+                    <span className="text-foreground font-semibold">500+</span> happy customers
                   </span>
                 </div>
                 <div className="hidden sm:flex items-center gap-1.5 text-sm text-muted-foreground">

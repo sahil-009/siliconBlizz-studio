@@ -8,7 +8,7 @@ const pillars = [
   {
     icon: Globe,
     title: "Digital Presence",
-    desc: "Conversion-focused websites and scalable applications built for performance.",
+    desc: "Conversion focused websites and scalable applications built for performance.",
   },
   {
     icon: Workflow,
