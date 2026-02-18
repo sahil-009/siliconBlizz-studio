@@ -8,7 +8,7 @@ const pillars = [
   {
     icon: Globe,
     title: "Digital Presence",
-    desc: "We design, build, and manage your entire application — from website and database to chatbot and WhatsApp integrations. ",
+    desc: "We design, build, and manage your entire application from website and database to chatbot and WhatsApp integrations. ",
   },
   {
     icon: Workflow,
