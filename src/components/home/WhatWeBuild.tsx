@@ -8,12 +8,12 @@ const pillars = [
   {
     icon: Globe,
     title: "Digital Presence",
-    desc: "Conversion focused websites and scalable applications built for performance.",
+    desc: "We design, build, and manage your entire application — from website and database to chatbot and WhatsApp integrations. ",
   },
   {
     icon: Workflow,
     title: "Automation Systems",
-    desc: "n8n workflows, CRM automation, WhatsApp bots, and API integrations.",
+    desc: "n8n workflows, CRM automation, WhatsApp bots, API integrations, and Instagram automation posts, reels, auto DMs, and comment replies with genuine engagement.",
   },
   {
     icon: BarChart3,
