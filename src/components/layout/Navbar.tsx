@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
 import { EnquireSidebar } from "@/components/ui/enquire-sidebar";
 
 const navItems = [
@@ -12,7 +10,6 @@ const navItems = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -21,7 +18,6 @@ export default function Navbar() {
   }, []);
 
   const scrollTo = (id: string) => {
-    setMobileOpen(false);
     if (id === "hero") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
@@ -55,33 +51,16 @@ export default function Navbar() {
           </EnquireSidebar>
         </div>
 
-        <button className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="md:hidden">
+          <EnquireSidebar>
+            <button
+              className="rounded-lg bg-primary/10 border border-primary/30 px-5 py-2 text-sm font-medium text-primary transition-all duration-300 hover:bg-primary/20 hover:border-primary/50 hover:scale-105 shadow-[0_0_20px_-5px_hsl(var(--primary)/0.3)]"
+            >
+              Enquire Now
+            </button>
+          </EnquireSidebar>
+        </div>
       </div>
-
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-nav-solid border-t border-border/30 h-screen fixed inset-0 top-16 z-40 bg-background/95 backdrop-blur-3xl"
-          >
-            <div className="container mx-auto px-6 py-4 flex flex-col gap-3">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollTo(item.id)}
-                  className="text-lg font-medium py-3 text-muted-foreground text-left border-b border-border/10"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </nav>
   );
 }

@@ -94,12 +94,14 @@ export default function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="flex flex-wrap gap-4"
               >
-                <button
-                  onClick={() => scrollTo("contact")}
-                  className="rounded-lg bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:brightness-110 hover:scale-105 animate-pulse-glow"
+                <a
+                  href="https://wa.me/916370008924"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-lg bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:brightness-110 hover:scale-105 animate-pulse-glow inline-block"
                 >
-                  Book Strategy Call
-                </button>
+                  Enquire Now
+                </a>
                 <button
                   onClick={() => scrollTo("solutions")}
                   className="group flex items-center gap-2 rounded-lg border border-border px-7 py-3 text-sm font-medium text-foreground transition-all duration-300 hover:border-primary/40 hover:text-primary hover:scale-105"
@@ -130,7 +132,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute bottom-6 sm:bottom-16 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4 sm:px-6"
+          className="hidden sm:block absolute bottom-6 sm:bottom-16 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4 sm:px-6"
         >
           <div className="glass-card rounded-2xl px-4 sm:px-8 py-4 sm:py-5 grid grid-cols-2 sm:flex sm:items-center sm:justify-between gap-4 sm:gap-6">
             {[

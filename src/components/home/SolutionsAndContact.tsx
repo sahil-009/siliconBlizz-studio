@@ -45,6 +45,8 @@ const solutionSections = [
   },
 ];
 
+const contactApiUrl = import.meta.env.VITE_CONTACT_API_URL ?? 'http://localhost:5000/api/contact';
+
 export default function SolutionsAndContact() {
   const [form, setForm] = useState({ name: "", email: "", company: "", type: "", description: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -66,18 +68,33 @@ export default function SolutionsAndContact() {
 
       // Send email via backend
       try {
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-        await fetch(`${apiUrl}/api/contact`, {
+        const response = await fetch(contactApiUrl, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify({
             name: form.name,
             email: form.email,
+            phone: form.phone || '',
             company: form.company,
             propertyType: form.type,
-            message: form.description
+            message: form.description,
           }),
         });
+
+        const json = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          // Lead was already saved to Firestore; if only email failed, still show success
+          if (response.status === 500 || response.status === 503) {
+            console.warn('Email notification failed, but lead was saved to Firestore');
+            return;
+          }
+          throw new Error(json.error || 'Failed to submit form');
+        }
+
+        console.log('Form submitted successfully:', json);
       } catch (emailError) {
         console.error("Failed to send email notif:", emailError);
         // We don't block success UI if only email fails, since Firestore saved it
