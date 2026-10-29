@@ -5,10 +5,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0e0e11" />
     <meta name="color-scheme" content="dark" />
-    <title>Silicon Blizz Studio</title>
-    <meta name="description" content="Silicon Blizz Studio Project" />
-    <meta name="author" content="Silicon Blizz Studio" />
-    <meta property="og:image" content="/og-image.png" />
+
+    <!--
+      All SEO/social tags live here (not only in React) because link-preview
+      crawlers for WhatsApp, LinkedIn, Facebook and X don't run JavaScript.
+    -->
+    <title>SiliconBlizz Studio | AI Automation &amp; Web Development Agency</title>
+    <meta
+      name="description"
+      content="SiliconBlizz Studio builds high-performance websites, custom apps and AI-powered automation (n8n, CRM, WhatsApp, dashboards) that help businesses save time and scale faster."
+    />
+    <meta
+      name="keywords"
+      content="SiliconBlizz, AI automation agency, web development company, n8n automation, WhatsApp automation, CRM automation, custom web apps, business process automation, social media automation, Bangalore, India"
+    />
+    <meta name="author" content="SiliconBlizz Studio" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://www.siliconblizz.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SiliconBlizz Studio" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:url" content="https://www.siliconblizz.com/" />
+    <meta property="og:title" content="SiliconBlizz Studio | Build Once. Automate Everything." />
+    <meta
+      property="og:description"
+      content="Websites, apps and AI-powered automation systems that scale your business, so you can focus on what matters most."
+    />
+    <meta property="og:image" content="https://www.siliconblizz.com/og-image.jpg" />
+    <meta property="og:image:secure_url" content="https://www.siliconblizz.com/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="SiliconBlizz Studio: Build Once. Automate Everything." />
+
+    <!-- X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SiliconBlizz Studio | Build Once. Automate Everything." />
+    <meta
+      name="twitter:description"
+      content="Websites, apps and AI-powered automation systems that scale your business, so you can focus on what matters most."
+    />
+    <meta name="twitter:image" content="https://www.siliconblizz.com/og-image.jpg" />
+    <meta name="twitter:image:alt" content="SiliconBlizz Studio: Build Once. Automate Everything." />
+
+    <!-- Icons & PWA -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="SiliconBlizz" />
+    <meta name="application-name" content="SiliconBlizz Studio" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.siliconblizz.com/#organization",
+            "name": "SiliconBlizz Studio",
+            "alternateName": "Silicon Blizz",
+            "url": "https://www.siliconblizz.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.siliconblizz.com/icon-512.png",
+              "width": 512,
+              "height": 512
+            },
+            "image": "https://www.siliconblizz.com/og-image.jpg",
+            "description": "AI-powered digital and automation studio building websites, scalable apps, automation systems and growth infrastructure.",
+            "email": "info.siliconblizz@gmail.com",
+            "telephone": "+91-6370008924",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+91-6370008924",
+              "email": "info.siliconblizz@gmail.com",
+              "contactType": "sales",
+              "areaServed": "Worldwide",
+              "availableLanguage": ["English", "Hindi"]
+            }
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://www.siliconblizz.com/#business",
+            "name": "SiliconBlizz Studio",
+            "url": "https://www.siliconblizz.com/",
+            "image": "https://www.siliconblizz.com/og-image.jpg",
+            "telephone": "+91-6370008924",
+            "email": "info.siliconblizz@gmail.com",
+            "parentOrganization": { "@id": "https://www.siliconblizz.com/#organization" },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Jayanagar, Bengaluru",
+              "addressRegion": "Karnataka",
+              "addressCountry": "IN"
+            },
+            "areaServed": "Worldwide",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Digital & Automation Services",
+              "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Websites & Web Apps", "description": "Conversion-optimised, fast websites and scalable web applications." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automation Workflows", "description": "End-to-end automation with n8n, Zapier and custom API integrations." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CRM & WhatsApp Systems", "description": "CRM pipeline automation with WhatsApp Business API chatbots and follow-ups." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dashboards & Internal Tools", "description": "Real-time analytics dashboards, KPI tracking and admin panels." } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Media Automation", "description": "Automated publishing, analytics and community management across social platforms." } }
+              ]
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.siliconblizz.com/#website",
+            "url": "https://www.siliconblizz.com/",
+            "name": "SiliconBlizz Studio",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://www.siliconblizz.com/#organization" }
+          }
+        ]
+      }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,6 +139,14 @@
 
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>SiliconBlizz Studio: AI Automation &amp; Web Development</h1>
+      <p>
+        We build websites, apps and AI-powered automation systems (n8n workflows, CRM &amp; WhatsApp automation,
+        dashboards and social media automation) that scale your business.
+      </p>
+      <p>Contact: <a href="mailto:info.siliconblizz@gmail.com">info.siliconblizz@gmail.com</a> · <a href="tel:+916370008924">+91 63700 08924</a></p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
