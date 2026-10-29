@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import { Megaphone, TrendingUp, Clock, Users } from "lucide-react";
@@ -44,26 +45,21 @@ export default function SocialMediaSection() {
   return (
     <section id="social-media" className="py-20 sm:py-32 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12 sm:mb-20"
+        <SectionHeading
+          eyebrow="Social media"
+          title={<>Social Media Automation{" "}<br className="hidden sm:block" /><span className="gradient-text">Join Us & Forget Worries</span></>}
+          description="We handle your entire social media presence from content creation to posting, analytics, and community management. All automated."
+          className="mb-12 sm:mb-20"
         >
-          <h2 className="font-display text-3xl sm:text-5xl font-bold mb-6">
-            Social Media Automation {" "}
-            <span className="gradient-text">Join Us & Forget Worries</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg mb-10">
-            We handle your entire social media presence  from content creation to posting, analytics, and community management. All automated.
-          </p>
+          <div className="mt-10">
 
           {/* Team tooltip row */}
           <div className="flex flex-row items-center justify-center w-full mb-4">
             <AnimatedTooltip items={teamMembers} />
           </div>
           <p className="text-sm text-muted-foreground">Our dedicated automation team</p>
-        </motion.div>
+          </div>
+        </SectionHeading>
 
         {/* Feature cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16 sm:mb-24">

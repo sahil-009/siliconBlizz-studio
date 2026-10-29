@@ -1,8 +1,7 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Globe, Workflow, BarChart3 } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { useRef } from "react";
 import { Meteors } from "@/components/ui/meteors";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 const pillars = [
   {
@@ -22,46 +21,47 @@ const pillars = [
   },
 ];
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 export default function WhatWeBuild() {
-  const { ref, visible } = useScrollReveal();
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [40, -40]);
-
   return (
-    <section ref={sectionRef} id="what-we-build" className="py-20 sm:py-32 relative">
-      <div className="container mx-auto px-4 sm:px-6" ref={ref}>
-        <motion.div style={{ y }} className={`text-center mb-10 sm:mb-16 section-fade-in ${visible ? "visible" : ""}`}>
-          <h2 className="font-display text-3xl sm:text-5xl font-bold mb-4">
-            Complete Digital <span className="gradient-text">Infrastructure</span>
-          </h2>
-          <p className="text-muted-foreground max-w-md mx-auto">
-            Everything you need to build, automate, and scale your digital operations.
-          </p>
-        </motion.div>
+    <section id="what-we-build" className="py-20 sm:py-32 relative">
+      <div className="container mx-auto px-4 sm:px-6">
+        <SectionHeading
+          eyebrow="What we build"
+          title={<>Complete Digital <span className="gradient-text">Infrastructure</span></>}
+          description="Everything you need to build, automate, and scale your digital operations."
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ staggerChildren: 0.12 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6"
+        >
           {pillars.map((item, i) => (
             <motion.div
               key={item.title}
-              whileHover={{ y: -8, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className={`glass-card-hover p-6 sm:p-8 cursor-default section-fade-in ${visible ? "visible" : ""}`}
-              style={{ transitionDelay: `${i * 0.15}s` }}
+              variants={{ hidden: { opacity: 0, y: 32 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: 0.7, ease }}
+              className="group glass-card-hover p-6 sm:p-8 cursor-default"
             >
-              <motion.div
-                whileHover={{ rotate: 10, scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 400 }}
-                className="w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center mb-6"
-              >
-                <item.icon size={22} className="text-primary" />
-              </motion.div>
+              <div className="flex items-start justify-between mb-6">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-primary/20 group-hover:shadow-[0_0_24px_-4px_hsl(var(--glow-purple)/0.6)]">
+                  <item.icon size={22} className="text-primary" />
+                </div>
+                <span className="font-display text-sm font-semibold text-muted-foreground/50 tabular-nums transition-colors duration-500 group-hover:text-primary/70">
+                  0{i + 1}
+                </span>
+              </div>
               <h3 className="font-display text-xl font-semibold mb-3">{item.title}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+              <div className="mt-6 h-px w-full bg-gradient-to-r from-primary/40 via-primary/10 to-transparent origin-left scale-x-[0.25] transition-transform duration-700 ease-out group-hover:scale-x-100" />
               <Meteors number={12} />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

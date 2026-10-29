@@ -1,5 +1,6 @@
 import { useState, lazy, Suspense, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { Send, Mail, MapPin, Settings, Loader2 } from "lucide-react";
 import { Globe, Workflow, BarChart3, MessageCircle } from "lucide-react";
 import { Meteors } from "@/components/ui/meteors";
@@ -119,20 +120,11 @@ export default function SolutionsAndContact() {
       {/* Solutions */}
       <section id="solutions" className="py-20 sm:py-32">
         <div className="container mx-auto px-4 sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12 sm:mb-20"
-          >
-            <h2 className="font-display text-3xl sm:text-5xl font-bold mb-6">
-              Digital Systems Designed{" "}
-              <span className="gradient-text">for Scale</span>
-            </h2>
-            <p className="text-muted-foreground max-w-lg mx-auto text-base sm:text-lg">
-              From beautiful frontends to invisible backend automation we build the systems that power modern businesses.
-            </p>
-          </motion.div>
+          <SectionHeading
+            eyebrow="Solutions"
+            title={<>Digital Systems Designed{" "} <span className="gradient-text">for Scale</span></>}
+            description="From beautiful frontends to invisible backend automation we build the systems that power modern businesses."
+          />
 
           <div className="space-y-6">
             {solutionSections.map((section, i) => (
@@ -177,19 +169,11 @@ export default function SolutionsAndContact() {
       <section id="contact" className="py-20 sm:py-32 relative overflow-hidden">
         <div className="aurora-bg" />
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-10 sm:mb-16"
-          >
-            <h2 className="font-display text-3xl sm:text-5xl font-bold mb-6">
-              Let's <span className="gradient-text">Build Together</span>
-            </h2>
-            <p className="text-muted-foreground max-w-md mx-auto text-base sm:text-lg">
-              Tell us about your project. We'll get back within 24 hours.
-            </p>
-          </motion.div>
+          <SectionHeading
+            eyebrow="Get in touch"
+            title={<>Let's <span className="gradient-text">Build Together</span></>}
+            description="Tell us about your project. We'll get back within 24 hours."
+          />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
             <motion.div
@@ -258,7 +242,7 @@ export default function SolutionsAndContact() {
                     disabled={loading}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full rounded-xl bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:brightness-110 animate-pulse-glow disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="btn-sheen w-full rounded-xl bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:brightness-110 animate-pulse-glow disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {loading ? (
                       <>

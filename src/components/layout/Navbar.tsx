@@ -17,9 +17,20 @@ const enquireButtonClass =
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState("hero");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+      // Active section = the last one whose top has passed 40% of the viewport
+      const marker = window.innerHeight * 0.4;
+      let current = "hero";
+      for (const { id } of navItems) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= marker) current = id;
+      }
+      setActive(current);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -49,16 +60,28 @@ export default function Navbar() {
           Silicon<span className="text-primary">Blizz</span>
         </button>
 
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNav(item.id)}
-              className="text-sm font-medium transition-colors duration-300 text-muted-foreground hover:text-foreground"
-            >
-              {item.label}
-            </button>
-          ))}
+        <div className="hidden md:flex items-center gap-4 lg:gap-6">
+          <div className="flex items-center rounded-full border border-border/40 bg-card/30 p-1">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleNav(item.id)}
+                aria-current={active === item.id ? "true" : undefined}
+                className={`relative rounded-full px-3.5 lg:px-4 py-1.5 text-sm font-medium transition-colors duration-300 ${
+                  active === item.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {active === item.id && (
+                  <motion.span
+                    layoutId="nav-active-pill"
+                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                    className="absolute inset-0 rounded-full bg-primary/15 border border-primary/30 shadow-[0_0_16px_-4px_hsl(var(--glow-purple)/0.5)]"
+                  />
+                )}
+                <span className="relative">{item.label}</span>
+              </button>
+            ))}
+          </div>
           <EnquireSidebar>
             <button className={enquireButtonClass}>Enquire Now</button>
           </EnquireSidebar>
@@ -95,7 +118,9 @@ export default function Navbar() {
                 <button
                   key={item.id}
                   onClick={() => handleNav(item.id)}
-                  className="py-3 text-left text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  className={`py-3 text-left text-base font-medium transition-colors hover:text-foreground ${
+                    active === item.id ? "text-primary" : "text-muted-foreground"
+                  }`}
                 >
                   {item.label}
                 </button>

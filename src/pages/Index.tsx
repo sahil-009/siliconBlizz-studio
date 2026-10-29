@@ -1,4 +1,5 @@
 import HeroSection from "@/components/home/HeroSection";
+import CapabilitiesMarquee from "@/components/home/CapabilitiesMarquee";
 import WhatWeBuild from "@/components/home/WhatWeBuild";
 import AutomationShowcase from "@/components/home/AutomationShowcase";
 import CaseStudyPreview from "@/components/home/CaseStudyPreview";
@@ -13,6 +14,7 @@ const Index = () => {
   return (
     <>
       <HeroSection />
+      <CapabilitiesMarquee />
       <WhatWeBuild />
       <AutomationShowcase />
       <CaseStudyPreview />

@@ -114,6 +114,88 @@
     transform: translateY(-4px);
   }
 
+  /* Cursor spotlight: --mx/--my are set by SpotlightTracker on hover-capable devices */
+  .glass-card-hover::before,
+  .glass-card-hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .glass-card-hover::before {
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), hsl(var(--glow-purple) / 0.1), transparent 45%);
+  }
+
+  /* Border that lights up near the cursor */
+  .glass-card-hover::after {
+    padding: 1px;
+    background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), hsl(var(--glow-purple) / 0.7), transparent 60%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .glass-card-hover:hover::before,
+    .glass-card-hover:hover::after {
+      opacity: 1;
+    }
+  }
+
+  /* Diagonal light sweep for primary buttons */
+  .btn-sheen {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .btn-sheen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.35), transparent);
+    animation: sheen 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .gradient-text-animated {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(110deg, hsl(0 0% 100%) 0%, hsl(270 90% 78%) 30%, hsl(var(--glow-purple)) 50%, hsl(290 85% 75%) 70%, hsl(0 0% 100%) 100%);
+    background-size: 220% 100%;
+    animation: text-shimmer 6s ease-in-out infinite;
+  }
+
+  @keyframes sheen {
+    0%, 70% {
+      transform: translateX(-120%) skewX(-20deg);
+    }
+
+    100% {
+      transform: translateX(320%) skewX(-20deg);
+    }
+  }
+
+  @keyframes text-shimmer {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+
   .glass-nav {
     @apply backdrop-blur-2xl border-b border-border/30;
     background: hsl(var(--background) / 0.7);

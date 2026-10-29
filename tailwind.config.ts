@@ -108,6 +108,16 @@ export default {
           from: { backgroundPosition: "50% 50%, 50% 50%" },
           to: { backgroundPosition: "350% 50%, 350% 50%" },
         },
+        "marquee": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        "packet": {
+          "0%": { left: "0%", opacity: "0" },
+          "15%": { opacity: "1" },
+          "85%": { opacity: "1" },
+          "100%": { left: "100%", opacity: "0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -119,6 +129,8 @@ export default {
         "float": "float 6s ease-in-out infinite",
         "meteor-effect": "meteor-effect 5s linear infinite",
         "aurora": "aurora 60s linear infinite",
+        "marquee": "marquee 40s linear infinite",
+        "packet": "packet 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite",
       },
     },
   },

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { Meteors } from "@/components/ui/meteors";
 
 const twitterReviews = [
@@ -62,19 +63,11 @@ export default function TwitterReviewsSection() {
   return (
     <section className="py-20 sm:py-32">
       <div className="container mx-auto px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-10 sm:mb-16"
-        >
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            What People Are <span className="gradient-text">Saying</span>
-          </h2>
-          <p className="text-muted-foreground max-w-md mx-auto text-base sm:text-lg">
-            Real tweets from real customers who love working with us.
-          </p>
-        </motion.div>
+        <SectionHeading
+          eyebrow="Testimonials"
+          title={<>What People Are <span className="gradient-text">Saying</span></>}
+          description="Real tweets from real customers who love working with us."
+        />
 
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 sm:gap-6 space-y-4 sm:space-y-6">
           {twitterReviews.map((review, i) => (

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { ExternalLink } from "lucide-react";
 import {
     CardContainer,
@@ -40,19 +41,11 @@ export default function OurWorks() {
     return (
         <section className="py-16 sm:py-24 lg:py-32">
             <div className="container mx-auto px-4 sm:px-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-8"
-                >
-                    <h2 className="font-display text-3xl sm:text-5xl font-bold mb-4">
-                        Our <span className="gradient-text">Works</span>
-                    </h2>
-                    <p className="text-muted-foreground max-w-md mx-auto">
-                        Live projects we've built and shipped for real businesses.
-                    </p>
-                </motion.div>
+                <SectionHeading
+                  eyebrow="Portfolio"
+                  title={<>Our <span className="gradient-text">Works</span></>}
+                  description="Live projects we've built and shipped for real businesses."
+                />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                     {projects.map((project, i) => (

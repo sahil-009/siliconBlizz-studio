@@ -31,6 +31,14 @@ function GlowCursorInner() {
       y = e.clientY;
       setOpacity("1");
       if (!frame) frame = requestAnimationFrame(paint);
+
+      // Feed the card spotlight effect (.glass-card-hover in index.css)
+      const card = (e.target as Element | null)?.closest?.<HTMLElement>(".glass-card-hover");
+      if (card) {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--mx", `${x - rect.left}px`);
+        card.style.setProperty("--my", `${y - rect.top}px`);
+      }
     };
     const leave = () => setOpacity("0");
     const enter = () => setOpacity("1");
