@@ -2,23 +2,23 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Users, Zap, Globe, Shield } from "lucide-react";
 import { lazy, Suspense, useRef } from "react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { scrollToSection } from "@/lib/scroll";
 
 const HeroScene = lazy(() => import("../HeroScene"));
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
+  // Only mount (and download) the WebGL scene where it's actually shown
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const textY = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const sceneY = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <AuroraBackground className="min-h-screen" showRadialGradient={true}>
-      <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden w-full">
+    <AuroraBackground showRadialGradient={true}>
+      <section ref={ref} id="hero" className="relative min-h-svh flex flex-col justify-center overflow-hidden w-full">
         {/* Background beams */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
           <div className="absolute top-0 left-1/3 w-px h-full bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
@@ -26,7 +26,7 @@ export default function HeroSection() {
           <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 pt-32 sm:pt-24 pb-20 sm:pb-16 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 pt-28 sm:pt-28 lg:pt-24 pb-12 sm:pb-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Left content */}
             <motion.div style={{ y: textY, opacity }}>
@@ -44,7 +44,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-4 sm:mb-6"
+                className="font-display text-[2.25rem] min-[400px]:text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] tracking-tight mb-4 sm:mb-6"
               >
                 Build Once.{" "}
                 <span className="gradient-text glow-text">Automate Everything.</span>
@@ -54,7 +54,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="text-lg text-muted-foreground max-w-md leading-relaxed mb-8"
+                className="text-base sm:text-lg text-muted-foreground max-w-md leading-relaxed mb-8"
               >
                 We build websites, apps, and AI powered automation systems that scale your business so you can focus on what matters most.
               </motion.p>
@@ -64,7 +64,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-wrap items-center gap-6 mb-10"
+                className="flex flex-wrap items-center gap-4 sm:gap-6 mb-8 sm:mb-10"
               >
                 <div className="flex items-center gap-2">
                   <div className="flex -space-x-2">
@@ -92,19 +92,19 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-wrap gap-4"
+                className="flex flex-col min-[400px]:flex-row flex-wrap gap-3 sm:gap-4"
               >
                 <a
                   href="https://wa.me/916370008924"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-lg bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:brightness-110 hover:scale-105 animate-pulse-glow inline-block"
+                  className="rounded-lg bg-primary px-7 py-3 text-center text-sm font-semibold text-primary-foreground transition-all duration-300 hover:brightness-110 hover:scale-105 animate-pulse-glow inline-block"
                 >
                   Enquire Now
                 </a>
                 <button
-                  onClick={() => scrollTo("solutions")}
-                  className="group flex items-center gap-2 rounded-lg border border-border px-7 py-3 text-sm font-medium text-foreground transition-all duration-300 hover:border-primary/40 hover:text-primary hover:scale-105"
+                  onClick={() => scrollToSection("solutions")}
+                  className="group flex items-center justify-center gap-2 rounded-lg border border-border px-7 py-3 text-sm font-medium text-foreground transition-all duration-300 hover:border-primary/40 hover:text-primary hover:scale-105"
                 >
                   Explore Solutions
                   <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -118,21 +118,23 @@ export default function HeroSection() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="hidden lg:block h-[300px] lg:h-[500px] relative w-full"
+              className="hidden lg:block h-[420px] xl:h-[500px] relative w-full"
             >
-              <Suspense fallback={<div className="w-full h-full" />}>
-                <HeroScene />
-              </Suspense>
+              {isDesktop && (
+                <Suspense fallback={<div className="w-full h-full" />}>
+                  <HeroScene />
+                </Suspense>
+              )}
             </motion.div>
           </div>
         </div>
 
-        {/* Stats bar */}
+        {/* Stats bar: in normal flow so it can never overlap the content on short screens */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden sm:block absolute bottom-6 sm:bottom-16 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4 sm:px-6"
+          className="hidden sm:block relative z-10 mx-auto mb-16 lg:mb-20 w-full max-w-3xl px-4 sm:px-6"
         >
           <div className="glass-card rounded-2xl px-4 sm:px-8 py-4 sm:py-5 grid grid-cols-2 sm:flex sm:items-center sm:justify-between gap-4 sm:gap-6">
             {[
@@ -159,7 +161,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-1"
         >
           <span className="text-xs text-muted-foreground">Scroll</span>
           <div className="w-5 h-8 rounded-full border border-border/50 flex justify-center pt-1.5">

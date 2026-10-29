@@ -9,14 +9,13 @@ export default function StarfieldBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationId: number;
+    let animationId = 0;
     let width = window.innerWidth;
     let height = window.innerHeight;
 
-    canvas.width = width;
-    canvas.height = height;
-
-    const STAR_COUNT = 180;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Scale density with screen area so phones aren't drawing as many stars as a 4K monitor
+    const STAR_COUNT = Math.round(Math.min(180, Math.max(60, (width * height) / 9000)));
     const stars = Array.from({ length: STAR_COUNT }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
@@ -27,23 +26,35 @@ export default function StarfieldBackground() {
       pulseSpeed: Math.random() * 0.008 + 0.003,
     }));
 
-    const handleResize = () => {
+    const resize = () => {
+      const prevWidth = width;
+      const prevHeight = height;
       width = window.innerWidth;
       height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (prevWidth && prevHeight) {
+        for (const s of stars) {
+          s.x = (s.x / prevWidth) * width;
+          s.y = (s.y / prevHeight) * height;
+        }
+      }
     };
-    window.addEventListener("resize", handleResize);
+    resize();
 
-    const draw = () => {
+    const draw = (animate: boolean) => {
       ctx.clearRect(0, 0, width, height);
 
       for (const s of stars) {
-        s.y -= s.speed;
-        s.pulse += s.pulseSpeed;
-        if (s.y < -2) {
-          s.y = height + 2;
-          s.x = Math.random() * width;
+        if (animate) {
+          s.y -= s.speed;
+          s.pulse += s.pulseSpeed;
+          if (s.y < -2) {
+            s.y = height + 2;
+            s.x = Math.random() * width;
+          }
         }
         const alpha = s.opacity * (0.6 + 0.4 * Math.sin(s.pulse));
         ctx.beginPath();
@@ -51,21 +62,45 @@ export default function StarfieldBackground() {
         ctx.fillStyle = `hsla(270, 60%, 75%, ${alpha})`;
         ctx.fill();
       }
-
-      animationId = requestAnimationFrame(draw);
     };
 
-    draw();
-    return () => {
+    const loop = () => {
+      draw(true);
+      animationId = requestAnimationFrame(loop);
+    };
+    const start = () => {
+      if (reducedMotion) {
+        draw(false);
+      } else if (!animationId) {
+        animationId = requestAnimationFrame(loop);
+      }
+    };
+    const stop = () => {
       cancelAnimationFrame(animationId);
+      animationId = 0;
+    };
+
+    const handleResize = () => {
+      resize();
+      if (reducedMotion) draw(false);
+    };
+    const handleVisibility = () => (document.hidden ? stop() : start());
+
+    window.addEventListener("resize", handleResize);
+    document.addEventListener("visibilitychange", handleVisibility);
+    start();
+
+    return () => {
+      stop();
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
+      className="fixed inset-0 h-full w-full pointer-events-none z-0"
       aria-hidden="true"
     />
   );

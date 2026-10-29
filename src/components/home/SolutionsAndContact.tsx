@@ -1,18 +1,16 @@
-import { useState, lazy, Suspense } from "react";
-import { motion } from "framer-motion";
+import { useState, lazy, Suspense, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Send, Mail, MapPin, Settings, Loader2 } from "lucide-react";
-import { db } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { Globe, Workflow, BarChart3, MessageCircle } from "lucide-react";
 import { Meteors } from "@/components/ui/meteors";
 
 const Globe3D = lazy(() => import("@/components/ui/3d-globe"));
 
 const globeMarkers = [
-  { lat: 40.7128, lng: -74.006, src: "/founder-images/sahil.jpeg", label: "India" },
-  { lat: 51.5074, lng: -0.1278, src: "/founder-images/rohit.jpeg", label: "India" },
-  { lat: 35.6762, lng: 139.6503, src: "/founder-images/allen.jpeg", label: "Tokyo" },
-  { lat: -33.8688, lng: 151.2093, src: "/founder-images/anwishka.jpeg", label: "India" },
+  { lat: 40.7128, lng: -74.006, src: "/founder-images/sahil.webp", label: "India" },
+  { lat: 51.5074, lng: -0.1278, src: "/founder-images/rohit.webp", label: "India" },
+  { lat: 35.6762, lng: 139.6503, src: "/founder-images/foreign.webp", label: "Tokyo" },
+  { lat: -33.8688, lng: 151.2093, src: "/founder-images/anwishka.webp", label: "India" },
 
 ];
 
@@ -52,6 +50,9 @@ export default function SolutionsAndContact() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Defer downloading three.js + globe textures until the contact section is close
+  const globeRef = useRef<HTMLDivElement>(null);
+  const globeNearView = useInView(globeRef, { once: true, margin: "400px 0px" });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,6 +60,11 @@ export default function SolutionsAndContact() {
     setError(null);
 
     try {
+      // Firebase is loaded on demand to keep it out of the initial bundle
+      const [{ db }, { collection, addDoc, serverTimestamp }] = await Promise.all([
+        import("@/lib/firebase"),
+        import("firebase/firestore"),
+      ]);
       await addDoc(collection(db, "leads"), {
         ...form,
         createdAt: serverTimestamp(),
@@ -112,18 +118,18 @@ export default function SolutionsAndContact() {
     <>
       {/* Solutions */}
       <section id="solutions" className="py-20 sm:py-32">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            className="text-center mb-12 sm:mb-20"
           >
             <h2 className="font-display text-3xl sm:text-5xl font-bold mb-6">
               Digital Systems Designed{" "}
               <span className="gradient-text">for Scale</span>
             </h2>
-            <p className="text-muted-foreground max-w-lg mx-auto text-lg">
+            <p className="text-muted-foreground max-w-lg mx-auto text-base sm:text-lg">
               From beautiful frontends to invisible backend automation we build the systems that power modern businesses.
             </p>
           </motion.div>
@@ -139,7 +145,7 @@ export default function SolutionsAndContact() {
                 whileHover={{ y: -4, scale: 1.005 }}
                 className="glass-card-hover p-6 sm:p-10 cursor-default"
               >
-                <div className="flex flex-col md:flex-row gap-8">
+                <div className="flex flex-col md:flex-row gap-5 md:gap-8">
                   <motion.div
                     whileHover={{ rotate: 10, scale: 1.1 }}
                     transition={{ type: "spring", stiffness: 400 }}
@@ -148,7 +154,7 @@ export default function SolutionsAndContact() {
                     <section.icon size={26} className="text-primary" />
                   </motion.div>
                   <div className="flex-1">
-                    <h3 className="font-display text-2xl font-bold mb-3">{section.title}</h3>
+                    <h3 className="font-display text-xl sm:text-2xl font-bold mb-3">{section.title}</h3>
                     <p className="text-muted-foreground mb-6 max-w-2xl">{section.desc}</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {section.features.map((f) => (
@@ -170,29 +176,29 @@ export default function SolutionsAndContact() {
       {/* Contact */}
       <section id="contact" className="py-20 sm:py-32 relative overflow-hidden">
         <div className="aurora-bg" />
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-10 sm:mb-16"
           >
             <h2 className="font-display text-3xl sm:text-5xl font-bold mb-6">
               Let's <span className="gradient-text">Build Together</span>
             </h2>
-            <p className="text-muted-foreground max-w-md mx-auto text-lg">
+            <p className="text-muted-foreground max-w-md mx-auto text-base sm:text-lg">
               Tell us about your project. We'll get back within 24 hours.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
               {submitted ? (
-                <div className="glass-card p-12 text-center">
+                <div className="glass-card p-8 sm:p-12 text-center">
                   <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-6">
                     <Send size={24} className="text-primary" />
                   </div>
@@ -224,7 +230,7 @@ export default function SolutionsAndContact() {
                         placeholder={field.label}
                         value={form[field.key as keyof typeof form]}
                         onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-                        className="w-full rounded-xl border border-border bg-card/60 backdrop-blur-sm px-5 py-3.5 text-sm text-foreground placeholder:text-muted-foreground outline-none glow-border-focus transition-all duration-300 hover:border-border/80"
+                        className="w-full rounded-xl border border-border bg-card/60 backdrop-blur-sm px-4 sm:px-5 py-3.5 text-base sm:text-sm text-foreground placeholder:text-muted-foreground outline-none glow-border-focus transition-all duration-300 hover:border-border/80"
                       />
                     </div>
                   ))}
@@ -232,7 +238,7 @@ export default function SolutionsAndContact() {
                     required
                     value={form.type}
                     onChange={(e) => setForm({ ...form, type: e.target.value })}
-                    className="w-full rounded-xl border border-border bg-card/60 backdrop-blur-sm px-5 py-3.5 text-sm text-foreground outline-none glow-border-focus appearance-none transition-all duration-300 hover:border-border/80"
+                    className="w-full rounded-xl border border-border bg-card/60 backdrop-blur-sm px-4 sm:px-5 py-3.5 text-base sm:text-sm text-foreground outline-none glow-border-focus appearance-none transition-all duration-300 hover:border-border/80"
                   >
                     <option value="" disabled className="bg-card text-muted-foreground">Project Type</option>
                     {projectTypes.map((t) => (
@@ -245,7 +251,7 @@ export default function SolutionsAndContact() {
                     placeholder="Tell us about your project..."
                     value={form.description}
                     onChange={(e) => setForm({ ...form, description: e.target.value })}
-                    className="w-full rounded-xl border border-border bg-card/60 backdrop-blur-sm px-5 py-3.5 text-sm text-foreground placeholder:text-muted-foreground outline-none glow-border-focus resize-none transition-all duration-300 hover:border-border/80"
+                    className="w-full rounded-xl border border-border bg-card/60 backdrop-blur-sm px-4 sm:px-5 py-3.5 text-base sm:text-sm text-foreground placeholder:text-muted-foreground outline-none glow-border-focus resize-none transition-all duration-300 hover:border-border/80"
                   />
                   <motion.button
                     type="submit"
@@ -273,14 +279,19 @@ export default function SolutionsAndContact() {
               viewport={{ once: true }}
               className="h-full"
             >
-              {/* 3D Globe */}
-              <div className="block h-[450px] lg:h-full w-full lg:w-[140%] -ml-4 lg:-ml-[20%] overflow-visible relative z-0">
-                <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-muted-foreground text-sm">Loading globe...</div>}>
-                  <Globe3D
-                    markers={globeMarkers}
-                    config={{ atmosphereColor: "#7c3aed", atmosphereIntensity: 15, bumpScale: 3, autoRotateSpeed: 0.4 }}
-                  />
-                </Suspense>
+              {/* 3D Globe: no pointer events on touch screens so swiping over it still scrolls the page */}
+              <div
+                ref={globeRef}
+                className="block h-[300px] sm:h-[400px] lg:h-full lg:min-h-[450px] w-full lg:w-[140%] lg:-ml-[20%] overflow-visible relative z-0 pointer-events-none [@media(hover:hover)_and_(pointer:fine)]:pointer-events-auto"
+              >
+                {globeNearView && (
+                  <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-muted-foreground text-sm">Loading globe...</div>}>
+                    <Globe3D
+                      markers={globeMarkers}
+                      config={{ atmosphereColor: "#7c3aed", atmosphereIntensity: 15, bumpScale: 3, autoRotateSpeed: 0.4 }}
+                    />
+                  </Suspense>
+                )}
               </div>
 
 

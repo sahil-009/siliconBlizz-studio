@@ -35,7 +35,7 @@ export function EnquireSidebar({ children }: { children: React.ReactNode }) {
             <SheetTrigger asChild>
                 {children}
             </SheetTrigger>
-            <SheetContent side="right" className="bg-background/95 backdrop-blur-xl border-border/50 w-[400px] sm:w-[540px]">
+            <SheetContent side="right" className="bg-background/95 backdrop-blur-xl border-border/50 w-[90vw] max-w-[420px] sm:w-[540px] sm:max-w-[540px] overflow-y-auto">
                 <SheetHeader className="mb-8">
                     <SheetTitle className="text-3xl font-display font-medium text-foreground">Get in <span className="text-primary">Touch</span></SheetTitle>
                     <p className="text-muted-foreground text-sm">
@@ -57,9 +57,9 @@ export function EnquireSidebar({ children }: { children: React.ReactNode }) {
                             <div className="p-3 rounded-full bg-primary/10 text-primary group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                                 <option.icon size={22} />
                             </div>
-                            <div>
+                            <div className="min-w-0">
                                 <span className="text-xs text-muted-foreground block mb-1 uppercase tracking-wider">{option.label}</span>
-                                <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+                                <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors duration-300 break-words">
                                     {option.value}
                                 </span>
                             </div>

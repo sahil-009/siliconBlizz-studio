@@ -82,7 +82,7 @@ function NetworkGraph() {
 
 export default function HeroScene() {
   return (
-    <Canvas camera={{ position: [0, 0, 5], fov: 45 }} style={{ width: "100%", height: "100%" }}>
+    <Canvas camera={{ position: [0, 0, 5], fov: 45 }} dpr={[1, 1.75]} style={{ width: "100%", height: "100%" }}>
       <ambientLight intensity={0.4} />
       <pointLight position={[5, 5, 5]} intensity={0.8} color="#8b5cf6" />
       <pointLight position={[-5, -5, 3]} intensity={0.5} color="#6d28d9" />

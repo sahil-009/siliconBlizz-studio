@@ -20,8 +20,8 @@ export default function AutomationShowcase() {
   return (
     <section ref={sectionRef} className="py-20 sm:py-32 relative overflow-hidden">
       <div className="aurora-bg" />
-      <div className="container mx-auto px-6 relative z-10" ref={ref}>
-        <motion.div style={{ y }} className={`text-center mb-20 section-fade-in ${visible ? "visible" : ""}`}>
+      <div className="container mx-auto px-4 sm:px-6 relative z-10" ref={ref}>
+        <motion.div style={{ y }} className={`text-center mb-12 sm:mb-20 section-fade-in ${visible ? "visible" : ""}`}>
           <h2 className="font-display text-3xl sm:text-5xl font-bold mb-4">
             Your Business. <span className="gradient-text">On Autopilot.</span>
           </h2>
@@ -36,7 +36,7 @@ export default function AutomationShowcase() {
               <motion.div
                 whileHover={{ y: -6, scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="glass-card-hover p-6 flex flex-col items-center gap-3 min-w-[120px] cursor-default"
+                className="glass-card-hover p-4 sm:p-6 flex flex-col items-center gap-3 min-w-[96px] sm:min-w-[120px] cursor-default"
               >
                 <motion.div
                   whileHover={{ rotate: -10 }}

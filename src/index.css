@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -59,10 +57,35 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
+    /* Guard against wide decorative elements causing sideways scroll on phones */
+    overflow-x: clip;
+    -webkit-tap-highlight-color: transparent;
   }
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Keep anchored sections clear of the fixed navbar */
+  section[id] {
+    scroll-margin-top: 4rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   h1,
@@ -174,11 +197,6 @@
 
   .section-fade-in.visible {
     @apply opacity-100 translate-y-0;
-  }
-
-  .metric-glow {
-    @apply text-accent-foreground font-bold;
-    text-shadow: 0 0 30px hsl(var(--glow-purple) / 0.5);
   }
 
   .metric-glow {

@@ -30,8 +30,8 @@ export default function WhatWeBuild() {
 
   return (
     <section ref={sectionRef} id="what-we-build" className="py-20 sm:py-32 relative">
-      <div className="container mx-auto px-6" ref={ref}>
-        <motion.div style={{ y }} className={`text-center mb-16 section-fade-in ${visible ? "visible" : ""}`}>
+      <div className="container mx-auto px-4 sm:px-6" ref={ref}>
+        <motion.div style={{ y }} className={`text-center mb-10 sm:mb-16 section-fade-in ${visible ? "visible" : ""}`}>
           <h2 className="font-display text-3xl sm:text-5xl font-bold mb-4">
             Complete Digital <span className="gradient-text">Infrastructure</span>
           </h2>
@@ -46,7 +46,7 @@ export default function WhatWeBuild() {
               key={item.title}
               whileHover={{ y: -8, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className={`glass-card-hover p-8 cursor-default section-fade-in ${visible ? "visible" : ""}`}
+              className={`glass-card-hover p-6 sm:p-8 cursor-default section-fade-in ${visible ? "visible" : ""}`}
               style={{ transitionDelay: `${i * 0.15}s` }}
             >
               <motion.div

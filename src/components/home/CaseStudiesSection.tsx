@@ -44,15 +44,15 @@ export default function CaseStudiesSection() {
   const filtered = active === "All" ? caseStudies : caseStudies.filter((c) => c.category === active);
 
   return (
-    <section id="case-studies" className="py-32">
-      <div className="container mx-auto px-6">
+    <section id="case-studies" className="py-20 sm:py-32">
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
-          <h2 className="font-display text-4xl sm:text-5xl font-bold mb-4">
+          <h2 className="font-display text-3xl sm:text-5xl font-bold mb-4">
             Case <span className="gradient-text">Studies</span>
           </h2>
           <p className="text-muted-foreground max-w-md mx-auto">
@@ -60,12 +60,12 @@ export default function CaseStudiesSection() {
           </p>
         </motion.div>
 
-        <div className="flex justify-center gap-2 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 mb-8 sm:mb-12">
           {filters.map((f) => (
             <button
               key={f}
               onClick={() => setActive(f)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${
                 active === f
                   ? "bg-primary/15 border-primary/40 text-primary"
                   : "border-border text-muted-foreground hover:text-foreground hover:border-border/80"
@@ -90,7 +90,7 @@ export default function CaseStudiesSection() {
                 key={c.project}
                 whileHover={{ y: -6, scale: 1.01 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="glass-card-hover p-8 cursor-default"
+                className="glass-card-hover p-6 sm:p-8 cursor-default"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-xs font-medium text-primary border border-primary/20 rounded-full px-3 py-1">
@@ -100,7 +100,7 @@ export default function CaseStudiesSection() {
                 <h3 className="font-display text-xl font-bold mb-2">{c.project}</h3>
                 <p className="text-muted-foreground text-sm mb-2"><strong className="text-secondary-foreground">Problem:</strong> {c.problem}</p>
                 <p className="text-muted-foreground text-sm mb-4"><strong className="text-secondary-foreground">Solution:</strong> {c.solution}</p>
-                <p className="metric-glow text-3xl font-display font-bold">{c.result}</p>
+                <p className="metric-glow text-2xl sm:text-3xl font-display font-bold">{c.result}</p>
                 <Meteors number={8} />
               </motion.div>
             ))}

@@ -17,7 +17,7 @@ export const AuroraBackground = ({
   return (
     <div
       className={cn(
-        "relative flex flex-col h-[100vh] items-center justify-center bg-background text-foreground transition-bg",
+        "relative flex flex-col min-h-svh items-center justify-center bg-background text-foreground transition-bg",
         className
       )}
       {...props}
@@ -34,7 +34,7 @@ export const AuroraBackground = ({
             after:content-[""] after:absolute after:inset-0
             after:[background-image:var(--aurora)]
             after:[background-size:200%,_100%]
-            after:animate-aurora after:[background-attachment:fixed]
+            after:animate-aurora lg:after:[background-attachment:fixed]
             after:mix-blend-difference
             pointer-events-none
             absolute -inset-[10px] opacity-50

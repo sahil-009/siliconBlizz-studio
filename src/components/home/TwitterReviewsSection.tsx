@@ -60,13 +60,13 @@ const twitterReviews = [
 
 export default function TwitterReviewsSection() {
   return (
-    <section className="py-24 sm:py-32">
+    <section className="py-20 sm:py-32">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             What People Are <span className="gradient-text">Saying</span>
@@ -91,6 +91,10 @@ export default function TwitterReviewsSection() {
                   src={review.avatar}
                   alt={review.name}
                   className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+                  width={40}
+                  height={40}
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="min-w-0">
                   <p className="font-semibold text-foreground text-sm truncate">{review.name}</p>

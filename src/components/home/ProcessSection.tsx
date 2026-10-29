@@ -8,16 +8,16 @@ export default function ProcessSection() {
 
   return (
     <section className="py-16 sm:py-24 lg:py-32" ref={ref}>
-      <div className="container mx-auto px-6">
-        <div className={`text-center mb-16 section-fade-in ${visible ? "visible" : ""}`}>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold mb-4">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className={`text-center mb-10 sm:mb-16 section-fade-in ${visible ? "visible" : ""}`}>
+          <h2 className="font-display text-3xl sm:text-5xl font-bold mb-4">
             Our <span className="gradient-text">Process</span>
           </h2>
         </div>
 
-        <div className={`flex flex-wrap items-center justify-center gap-4 md:gap-0 section-fade-in ${visible ? "visible" : ""}`} style={{ transitionDelay: "0.2s" }}>
+        <div className={`grid grid-cols-2 gap-y-8 md:flex md:flex-wrap md:items-center md:justify-center md:gap-0 section-fade-in ${visible ? "visible" : ""}`} style={{ transitionDelay: "0.2s" }}>
           {steps.map((step, i) => (
-            <div key={step} className="flex items-center">
+            <div key={step} className="flex items-center justify-center">
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 className="flex flex-col items-center gap-3 cursor-default min-w-[90px]"

@@ -16,10 +16,10 @@ export default function CaseStudyPreview() {
   const y = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
-    <section ref={sectionRef} className="py-32" id="case-studies-preview">
-      <div className="container mx-auto px-6" ref={ref}>
-        <motion.div style={{ y }} className={`text-center mb-16 section-fade-in ${visible ? "visible" : ""}`}>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold mb-4">
+    <section ref={sectionRef} className="py-20 sm:py-32" id="case-studies-preview">
+      <div className="container mx-auto px-4 sm:px-6" ref={ref}>
+        <motion.div style={{ y }} className={`text-center mb-10 sm:mb-16 section-fade-in ${visible ? "visible" : ""}`}>
+          <h2 className="font-display text-3xl sm:text-5xl font-bold mb-4">
             Real <span className="gradient-text">Results</span>
           </h2>
         </motion.div>
@@ -30,10 +30,10 @@ export default function CaseStudyPreview() {
               key={c.label}
               whileHover={{ y: -6, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className={`glass-card-hover p-10 cursor-default section-fade-in ${visible ? "visible" : ""}`}
+              className={`glass-card-hover p-6 sm:p-10 cursor-default section-fade-in ${visible ? "visible" : ""}`}
               style={{ transitionDelay: `${i * 0.15}s` }}
             >
-              <p className="metric-glow text-5xl font-display font-bold mb-2">{c.metric}</p>
+              <p className="metric-glow text-4xl sm:text-5xl font-display font-bold mb-2">{c.metric}</p>
               <p className="text-foreground font-semibold text-lg mb-3">{c.label}</p>
               <p className="text-muted-foreground text-sm leading-relaxed">{c.desc}</p>
               <Meteors number={10} />

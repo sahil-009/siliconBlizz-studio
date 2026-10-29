@@ -13,7 +13,7 @@ const projects = [
         description:
             "Full website build, CRM setup, automated client follow-ups, and complete social media management.",
         url: "https://ruinteriordesigns.in",
-        image: "/works/ru-interior.png",
+        image: "/works/ru-interior.webp",
         tags: ["Website", "CRM", "Automation"],
     },
     {
@@ -22,7 +22,7 @@ const projects = [
         description:
             "Automated reporting pipeline, Slack notifications, and CRM sync — saving 20+ hours per week.",
         url: "https://interior-studio-tau.vercel.app/",
-        image: "/works/hm-interior.png",
+        image: "/works/hm-interior.webp",
         tags: ["Automation", "CRM", "Reporting"],
     },
     {
@@ -31,7 +31,7 @@ const projects = [
         description:
             "Luxury interior design showcase with immersive scroll-driven animations and premium visual storytelling.",
         url: "https://living-spaces-showcase.vercel.app/",
-        image: "/works/living-spaces.png",
+        image: "/works/living-spaces.webp",
         tags: ["Website", "Animation", "Design"],
     },
 ];
@@ -39,14 +39,14 @@ const projects = [
 export default function OurWorks() {
     return (
         <section className="py-16 sm:py-24 lg:py-32">
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-4 sm:px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="text-center mb-8"
                 >
-                    <h2 className="font-display text-4xl sm:text-5xl font-bold mb-4">
+                    <h2 className="font-display text-3xl sm:text-5xl font-bold mb-4">
                         Our <span className="gradient-text">Works</span>
                     </h2>
                     <p className="text-muted-foreground max-w-md mx-auto">
@@ -119,6 +119,7 @@ export default function OurWorks() {
                                                 alt={project.name}
                                                 className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                                                 loading="lazy"
+                                                decoding="async"
                                             />
                                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
                                                 <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-sm font-medium flex items-center gap-1.5">

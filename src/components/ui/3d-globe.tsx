@@ -70,6 +70,7 @@ interface MarkerProps {
 function Marker({ marker, radius, defaultSize, onClick, onHover }: MarkerProps) {
   const [hovered, setHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const isVisibleRef = useRef(true);
   const groupRef = useRef<THREE.Group>(null);
   const imageGroupRef = useRef<THREE.Group>(null);
   const { camera } = useThree();
@@ -85,7 +86,12 @@ function Marker({ marker, radius, defaultSize, onClick, onHover }: MarkerProps) 
     const markerDirection = worldPos.clone().normalize();
     const cameraDirection = camera.position.clone().normalize();
     const dot = markerDirection.dot(cameraDirection);
-    setIsVisible(dot > 0.1);
+    const nextVisible = dot > 0.1;
+    // Only touch React state when visibility flips, not on every frame
+    if (nextVisible !== isVisibleRef.current) {
+      isVisibleRef.current = nextVisible;
+      setIsVisible(nextVisible);
+    }
   });
 
   const handlePointerEnter = useCallback(() => { setHovered(true); onHover?.(marker); }, [marker, onHover]);
@@ -137,8 +143,8 @@ function RotatingGlobe({ config, markers, onMarkerClick, onMarkerHover }: Rotati
   const [earthTexture, bumpTexture] = useTexture([config.textureUrl, config.bumpMapUrl]);
 
   useMemo(() => {
-    if (earthTexture) { earthTexture.colorSpace = THREE.SRGBColorSpace; earthTexture.anisotropy = 16; }
-    if (bumpTexture) { bumpTexture.anisotropy = 8; }
+    if (earthTexture) { earthTexture.colorSpace = THREE.SRGBColorSpace; earthTexture.anisotropy = 8; }
+    if (bumpTexture) { bumpTexture.anisotropy = 4; }
   }, [earthTexture, bumpTexture]);
 
   const geometry = useMemo(() => new THREE.SphereGeometry(config.radius, 64, 64), [config.radius]);
@@ -231,7 +237,7 @@ export function Globe3D({ markers = [], config = {}, className, onMarkerClick, o
   const mergedConfig = useMemo(() => ({ ...defaultConfig, ...config }), [config]);
   return (
     <div className={cn("w-full h-full", className)}>
-      <Canvas gl={{ alpha: true, antialias: true }} style={{ background: "transparent" }}>
+      <Canvas gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }} dpr={[1, 1.75]} style={{ background: "transparent" }}>
         <Suspense fallback={<LoadingFallback />}>
           <Scene markers={markers} config={mergedConfig} onMarkerClick={onMarkerClick} onMarkerHover={onMarkerHover} />
         </Suspense>
